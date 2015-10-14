@@ -1,0 +1,18 @@
+[
+    "base",
+    "img",
+    "video",
+    "audio",
+    "iframe",
+    "frame",
+    "frameset",
+    "object",
+    "param",
+    "applet",
+    "embed",
+    "form",
+    "input",
+    "textarea",
+    "select",
+    "option"
+]

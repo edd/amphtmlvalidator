@@ -1,0 +1,21 @@
+{
+  "name": "amphtmlvalidator",
+  "version": "0.0.1",
+  "description": "Validate a given URL as valid AMP HTML",
+  "main": "index.js",
+  "scripts": {
+    "example": "node index.js https://www.ampproject.org/how-it-works",
+    "fetch-tags": "node scripts/get-valid-tags.js",
+    "update-tags": "node scripts/get-valid-tags > data/valid-tags.json"
+  },
+  "author": "Edd Hannay",
+  "license": "MIT",
+  "devDependencies": {
+    "command-line-args": "^2.0.2",
+    "html-tags": "^1.1.1",
+    "jsdom": "^6.5.1",
+    "ramda": "^0.18.0",
+    "superagent": "^1.4.0",
+    "tap": "^2.1.1"
+  }
+}
