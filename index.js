@@ -14,7 +14,7 @@ function isValidElement(tagName) {
 }
 
 function validateDocumentStructure(doc) {
- //   tap.ok(doc['doctype'], '<!doctype html>', 'Doctype should be correct, got: ' + res.document['doctype'] );
+    tap.equal(doc.doctype.name, 'html', 'Doctype should be html');
 
     tap.ok(doc.head, 'Document must have a head');
     tap.ok(doc.body, 'Document must have a body');
