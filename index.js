@@ -13,17 +13,25 @@ function isValidElement(tagName) {
     return !R.contains(tagName)(tagWhitelist);
 }
 
+function hasValidAmpProperty(h) {
+	return ('' === h.getAttribute('amp') || 
+			'' === h.getAttribute('data-amp') ||
+			'' === h.getAttribute('⚡'));
+}
+
 function validateDocumentStructure(doc) {
     tap.equal(doc.doctype.name, 'html', 'Doctype should be html');
 
     tap.ok(doc.head, 'Document must have a head');
     tap.ok(doc.body, 'Document must have a body');
-    
+
+	tap.ok(hasValidAmpProperty(doc.documentElement),
+		'HTML element must have amp property');
     return doc;
 }
 
 function validateMetaTags(doc) {
-    var charsetMetaTag = doc.head.childNodes[1];
+    var charsetMetaTag = doc.querySelector('head > *');
 
     tap.equal(charsetMetaTag.tagName, 'META',
         'Expected first child of HEAD tag to be a meta tag');
@@ -48,9 +56,7 @@ function validateHeadContents(doc) {
     tap.ok(doc.querySelector('head link[rel="canonical"]'),
         'Document must contain a canonical link');
     
-    var ampScriptTag = doc.querySelector('head script[src^="https://cdn.ampproject.org"]'); 
-    tap.equal(ampScriptTag.getAttribute('src'), 'https://cdn.ampproject.org/v0.js',
-        'Must contain a reference to the AMP JS library');
+    var ampScriptTag = doc.querySelector('head script[src^="https://cdn.ampproject.org/v0.js"]'); 
     tap.equal(ampScriptTag.getAttribute('async'), '',
         'AMP JS library script tag must be async');
 

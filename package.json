@@ -4,7 +4,7 @@
   "description": "Validate a given URL as valid AMP HTML",
   "main": "index.js",
   "scripts": {
-    "example": "node index.js https://www.ampproject.org/how-it-works",
+    "example": "node index.js https://amp.gstatic.com/v/mobile.nytimes.com/2015/10/07/us/politics/hillary-clintons-proposed-changes-to-health-law-zero-in-on-affordability.amp.html?amp_js_v=0",
     "fetch-tags": "node scripts/get-valid-tags.js",
     "update-tags": "node scripts/get-valid-tags > data/valid-tags.json"
   },
