@@ -2,6 +2,7 @@ var tap = require('tap');
 var jsdom = require('jsdom');
 var R = require('ramda');
 var tagWhitelist = require('./data/valid-tags.json');
+var tagBuiltins = require('./data/builtins');
 var commandLineArgs = require('command-line-args');
 
 var cli = commandLineArgs([
@@ -13,10 +14,25 @@ function isValidElement(tagName) {
     return !R.contains(tagName)(tagWhitelist);
 }
 
+function isAmpTag(tagName) {
+	return tagName.match(/amp-([\w-]*)/) && ! R.contains(tagName)(tagBuiltins);
+}
+
 function hasValidAmpProperty(h) {
 	return ('' === h.getAttribute('amp') || 
 			'' === h.getAttribute('data-amp') ||
 			'' === h.getAttribute('⚡'));
+}
+
+function hasCorrespondingScriptTag(doc, tagName) {
+	var script = doc.querySelector('head script[custom-element="' + tagName + '"]');
+
+	tap.ok(script, 'HEAD must contain script tag for custom element ' + tagName);
+	
+	if (!script) { return; }
+    tap.equal(script.getAttribute('async'), '',
+        tagName + ' script tag must be async');
+
 }
 
 function validateDocumentStructure(doc) {
@@ -75,8 +91,13 @@ function validateMarkup(doc) {
     var invalidTags = R.filter(isValidElement)(tags);
     
     tap.deepEqual(invalidTags, [], 'All tags should be valid');
+   
+
+	var ampTags = R.filter(isAmpTag)(tags);
+	var customElementsHaveScripts = R.curry(hasCorrespondingScriptTag)(doc);
+	R.map(customElementsHaveScripts, ampTags);
     
-    return doc;
+	return doc;
 }
 
 function validate(err, res) {

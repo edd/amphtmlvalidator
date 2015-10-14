@@ -6,10 +6,7 @@ It is not currently feature complete, and does not test all requirements of the 
 
 ## Todo
 Validate:
-* doctype
-* AMP attribute on HTML
 * Style tag count
-* Script tags to match amp-* elements
 * Based on HTML 5 element list, rather than an element whitelist
 * Prohibited tag usage (e.g. link hrefs must not contain javascript)
 * ...
