@@ -101,7 +101,13 @@ function validateMarkup(doc) {
 }
 
 function validate(err, res) {
-    var validation = R.pipe(
+	tap.test('Prerequisites', {bail: true}, function (t) {
+		t.error(err, 'Expected no error');
+		t.ok(res.document, 'Expected a result with a document');
+		t.end();
+	});
+    
+	var validation = R.pipe(
         validateMetaTags,
         validateDocumentStructure,
         validateHeadContents,
