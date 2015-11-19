@@ -1,3 +1,5 @@
+Note: This is unmaintained. [The official validator is now open source](https://github.com/ampproject/amphtml/tree/master/validator), or [amp-validator](https://github.com/dorightdigital/amp-validator) is more current.
+
 # AMP HTML Validator
 
 A fairly simplistic command line validator for [AMP HTML pages](https://github.com/ampproject/amphtml). The AMP JS library provides a browser-based validator, accessible by appending ```#development=1``` to the page address, but this tool can be useful for testing purposes.
