@@ -15,7 +15,7 @@
     "html-tags": "^1.1.1",
     "jsdom": "^6.5.1",
     "ramda": "^0.18.0",
-    "superagent": "^1.4.0",
+    "superagent": "^6.1.0",
     "tap": "^2.1.1"
   }
 }
